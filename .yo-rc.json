@@ -1,0 +1,7 @@
+{
+  "generator-react-webpack": {
+    "appName": "masterOfCards",
+    "style": "sass",
+    "postcss": true
+  }
+}
