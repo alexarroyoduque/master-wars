@@ -1,26 +1,31 @@
 'use strict';
 
 import React from 'react';
+import Card from './CardComponent.js';
 
 require('styles/CardsContainer.sass');
 
-let CardsContainerComponent = (props) => (
-  <div className='cardscontainer-component'>
-    <ul>
-      {props.heroes.map(function(item) {
-        return <li key={item.name}>{item.name}</li>
-      })}
-    </ul>
-    <p>fin</p>
-  </div>
-);
+class CardsContainerComponent extends React.Component {
+  render() {
+    return (
+      <div className='cardscontainer-component'>
+        <ul>
+          {this.props.heroes.map(function(item) {
+            return <li key={item.name}> <Card hero={item}/> </li>
+          })}
+        </ul>
+        <p>myProp en cardsContainer: {this.props.myProp}</p>
+      </div>
+    );
+  }
+}
 
 CardsContainerComponent.displayName = 'CardsContainerComponent';
 
 // Uncomment properties you need
 CardsContainerComponent.propTypes = {
-  name: React.PropTypes.string,
-  heroes: React.PropTypes.array
+  heroes: React.PropTypes.array,
+  myProp: React.PropTypes.string
 };
 CardsContainerComponent.defaultProps = {
   heroes: [

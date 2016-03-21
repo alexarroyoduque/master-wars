@@ -4,11 +4,16 @@ import React from 'react';
 
 require('styles/Card.sass');
 
-let CardComponent = (props) => (
-  <div className="card-component">
-    <p>Esto es una tarjeta</p>
-  </div>
-);
+class CardComponent extends React.Component {
+
+  render() {
+    return (
+      <div className="card-component">
+        <p>Card</p>
+      </div>
+    );
+  }
+}
 
 CardComponent.displayName = 'CardComponent';
 
