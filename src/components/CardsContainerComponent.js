@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-var createFragment = require('react-addons-create-fragment');
-
 require('styles/CardsContainer.sass');
 
 let CardsContainerComponent = (props) => (

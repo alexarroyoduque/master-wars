@@ -10,7 +10,7 @@ require('styles/ApiMarvel.sass');
 class ApiMarvelComponent extends React.Component {
   handleClick() {
     client.get('http://localhost:3000/marvel', (data) => {
-      // console.log(data);
+      console.log(data);
     });
   }
   render() {

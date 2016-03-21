@@ -27,12 +27,6 @@ module.exports = {
     publicPath: defaultSettings.publicPath,
     noInfo: false
   },
-  proxy: {
-    '/some/path*': {
-      target: 'https://other-server.example.com',
-      secure: false,
-    },
-  },
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
