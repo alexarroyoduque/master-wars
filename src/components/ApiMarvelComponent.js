@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-
+import Q from 'q';
 
 var Client = require('node-rest-client').Client,
     client = new Client();
@@ -16,32 +16,38 @@ class ApiMarvelComponent extends React.Component {
       hero2: '-'
     };
     this.getHeroes = this.getHeroes.bind(this);
-    this.callBack = this.callBack.bind(this);
+    // this.callBack = this.callBack.bind(this);
   }
+
   getHeroes() {
-    client.get('http://localhost:3000/marvel', (response) => {
-      console.log(response.data.results);
-      this.setState({hero1: response.data.results[0].name});
-      this.setState({hero2: response.data.results[1].name});
-    });
+    var deferred = Q.defer();
+    client
+      .get('http://localhost:3000/marvel', (response) => {
+        console.log(response.data.results);
+        this.setState({hero1: response.data.results[0]});
+        this.setState({hero2: response.data.results[1]});
+        this.props.myFunc();
+        deferred.resolve('promesa');
+      })
+      .on('error', function (err) {
+        console.log('something went wrong on the request');
+        deferred.reject(new Error(err));
+      });
+
+    return deferred.promise;
   }
-  callBack() {
-    this.props.myFunc();
-  }
+  // callBack() {
+  //   this.props.myFunc();
+  // }
   myFunc() {
-    console.log('myFunc');
-    var a = Math.random() + '';
-    console.log(a);
-    return a;
+    return [this.state.hero1, this.state.hero2];
   }
   render() {
     return (
       <div className='apimarvel-component'>
         <button onClick={this.getHeroes}>Llamar a la api</button>
-        <button onClick={this.callBack}>Probar callback</button>
-        <pre>Hero 1: {this.state.hero1}</pre>
-        <pre>Hero 2: {this.state.hero2}</pre>
-        <pre>myProp: {this.props.myProp}</pre>
+        <pre>Hero 1: {this.state.hero1.name}</pre>
+        <pre>Hero 2: {this.state.hero2.name}</pre>
       </div>
     );
   }
@@ -51,8 +57,7 @@ ApiMarvelComponent.displayName = 'ApiMarvelComponent';
 
 // Uncomment properties you need
 ApiMarvelComponent.propTypes = {
-  myFunc: React.PropTypes.func,
-  myProp: React.PropTypes.string
+  myFunc: React.PropTypes.func
 };
 // ApiMarvelComponent.defaultProps = {};
 

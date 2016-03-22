@@ -11,10 +11,9 @@ class CardsContainerComponent extends React.Component {
       <div className='cardscontainer-component'>
         <ul>
           {this.props.heroes.map(function(item) {
-            return <li key={item.name}> <Card hero={item}/> </li>
+            return <li key={item.id}> <Card hero={item}/> </li>
           })}
         </ul>
-        <p>myProp en cardsContainer: {this.props.myProp}</p>
       </div>
     );
   }
@@ -24,14 +23,10 @@ CardsContainerComponent.displayName = 'CardsContainerComponent';
 
 // Uncomment properties you need
 CardsContainerComponent.propTypes = {
-  heroes: React.PropTypes.array,
-  myProp: React.PropTypes.string
+  heroes: React.PropTypes.array
 };
 CardsContainerComponent.defaultProps = {
-  heroes: [
-   {name: 'Spiderman'},
-   {name: 'Lobezno'}
-  ]
+  heroes: ['default1', 'default2']
 };
 
 export default CardsContainerComponent;

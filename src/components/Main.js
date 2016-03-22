@@ -11,13 +11,12 @@ class AppComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      propA: 'a',
-      propB: 'b'
+      heroes: []
     };
   }
 
-  siblingAFunc(arg) {
-    this.setState({propA: this.refs.apiMarvel.myFunc()});
+  setHeroes() {
+    this.setState({heroes: this.refs.apiMarvel.myFunc()});
   }
 
   render() {
@@ -25,8 +24,8 @@ class AppComponent extends React.Component {
       <div className="index">
         <img src={yeomanImage} alt="Yeoman Generator" />
         <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
-        <ApiMarvel ref="apiMarvel" myProp={this.state.propA} myFunc={this.siblingAFunc.bind(this)}/>
-        <CardsContainer myProp={this.state.propA}/>
+        <ApiMarvel ref="apiMarvel" heroes={this.state.heroes} myFunc={this.setHeroes.bind(this)}/>
+        <CardsContainer heroes={this.state.heroes}/>
       </div>
     );
   }
