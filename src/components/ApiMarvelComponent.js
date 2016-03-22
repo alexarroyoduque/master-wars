@@ -13,7 +13,8 @@ class ApiMarvelComponent extends React.Component {
     super(props);
     this.state = {
       hero1: '-',
-      hero2: '-'
+      hero2: '-',
+      someHeroes: []
     };
     this.getHeroes = this.getHeroes.bind(this);
     // this.callBack = this.callBack.bind(this);
@@ -24,6 +25,7 @@ class ApiMarvelComponent extends React.Component {
     client
       .get('http://localhost:3000/marvel', (response) => {
         console.log(response.data.results);
+        this.setState({someHeroes: response.data.results});
         this.setState({hero1: response.data.results[0]});
         this.setState({hero2: response.data.results[1]});
         this.props.myFunc();
@@ -40,14 +42,12 @@ class ApiMarvelComponent extends React.Component {
   //   this.props.myFunc();
   // }
   myFunc() {
-    return [this.state.hero1, this.state.hero2];
+    return this.state.someHeroes;
   }
   render() {
     return (
       <div className='apimarvel-component'>
         <button onClick={this.getHeroes}>Llamar a la api</button>
-        <pre>Hero 1: {this.state.hero1.name}</pre>
-        <pre>Hero 2: {this.state.hero2.name}</pre>
       </div>
     );
   }

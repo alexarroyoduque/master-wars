@@ -7,16 +7,27 @@ import CardsContainer from './CardsContainerComponent';
 
 let yeomanImage = require('../images/yeoman.png');
 
+function shuffle(a) {
+  return a.sort(function() {return Math.random() - 0.5});
+}
+
 class AppComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      heroes: []
+      selectedHeroes: [],
+      someHeroes: []
     };
+    this.selectHeroesForBattle = this.selectHeroesForBattle.bind(this);
+  }
+
+  selectHeroesForBattle() {
+    this.setState({selectedHeroes: [this.state.someHeroes.pop(), this.state.someHeroes.pop()]});
   }
 
   setHeroes() {
-    this.setState({heroes: this.refs.apiMarvel.myFunc()});
+    this.setState({someHeroes: shuffle(this.refs.apiMarvel.myFunc())});
+    this.selectHeroesForBattle();
   }
 
   render() {
@@ -24,8 +35,14 @@ class AppComponent extends React.Component {
       <div className="index">
         <img src={yeomanImage} alt="Yeoman Generator" />
         <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
-        <ApiMarvel ref="apiMarvel" heroes={this.state.heroes} myFunc={this.setHeroes.bind(this)}/>
-        <CardsContainer heroes={this.state.heroes}/>
+        <ApiMarvel ref="apiMarvel" heroes={this.state.selectedHeroes} myFunc={this.setHeroes.bind(this)}/>
+        <button disabled={this.state.someHeroes.length < 2} onClick={this.selectHeroesForBattle}>Nuevos contrincantes {this.state.someHeroes.length}</button>
+        <div>
+          <button disabled={!this.state.someHeroes.length}>Retar a eventos</button>
+          <button disabled={!this.state.someHeroes.length}>Retar a series</button>
+          <button disabled={!this.state.someHeroes.length}>Retar a historias</button>
+        </div>
+        <CardsContainer heroes={this.state.selectedHeroes}/>
       </div>
     );
   }

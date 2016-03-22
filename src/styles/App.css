@@ -19,3 +19,11 @@ body {
   border-width: 1px 0;
   background: #666;
 }
+
+button {
+  color: #000;
+}
+
+button:disabled {
+  color: #c1c1c1;
+}

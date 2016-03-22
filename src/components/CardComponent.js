@@ -3,7 +3,6 @@
 import React from 'react';
 
 require('styles/Card.sass');
-        // <img src={this.props.hero.thumbnail.path + `.` + this.props.hero.thumbnail.extension}/>
 
 class CardComponent extends React.Component {
 
