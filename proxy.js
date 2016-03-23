@@ -25,22 +25,20 @@ function proxy() {
       return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  function generateUrl() {
+  function generateUrl(limit) {
     const base = 'http://gateway.marvel.com/v1/public/characters?',
       apikey = '04bbc7aed211dea82a9012da2d8c3582',
-      limit = 20,
       total = 1485 - limit,
       offset = getRandomInt(1, total);
       privatekey = '2a5bcb9d808a7f3173bfa17b926ac8664a3e6e32',
       ts = new Date().getTime(),
       hash = Md5(`${ts}${privatekey}${apikey}`),
       url = `${base}limit=${limit}&offset=${offset}&apikey=${apikey}&ts=${ts}&hash=${hash}`;
-
     return url;
   }
 
-  app.get('/marvel', (req, res) => {
-    client.get(generateUrl(), (data) => {
+  app.get('/marvel/characters/:limit', (req, res) => {
+    client.get(generateUrl(req.params.limit), (data) => {
       res.send(data);
     });
   });

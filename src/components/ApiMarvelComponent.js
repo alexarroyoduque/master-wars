@@ -3,6 +3,16 @@
 import React from 'react';
 import Q from 'q';
 
+function shuffle(a) {
+  return a.sort(function() {return Math.random() - 0.5});
+}
+
+function getSomeShuffleCollection(collection, amount = 22) {
+  let some = shuffle(collection);
+  some.length = amount
+  return some;
+}
+
 var Client = require('node-rest-client').Client,
     client = new Client();
 
@@ -12,23 +22,33 @@ class ApiMarvelComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hero1: '-',
-      hero2: '-',
-      someHeroes: []
+      someCharacters: [],
+      loading: false,
+      ready: false,
+      error: false
     };
-    this.getHeroes = this.getHeroes.bind(this);
-    // this.callBack = this.callBack.bind(this);
+    this.getCharacters = this.getCharacters.bind(this);
   }
 
-  getHeroes() {
+  getCharacters() {
     var deferred = Q.defer();
+    this.setState({loading: true});
+    this.setState({ready: false});
+    this.setState({error: false});
+    this.setState({someCharacters: []});
+    this.getSomeCharacters();
     client
-      .get('http://localhost:3000/marvel', (response) => {
-        console.log(response.data.results);
-        this.setState({someHeroes: response.data.results});
-        this.setState({hero1: response.data.results[0]});
-        this.setState({hero2: response.data.results[1]});
-        this.props.myFunc();
+      .get('http://localhost:3000/marvel/characters/100', (response) => {
+        this.setState({loading: false});
+        if (!response.data) {
+            this.setState({error: true});
+        } else {
+          console.log(response.data.results);
+          this.setState({someCharacters: getSomeShuffleCollection(response.data.results)});
+          this.setState({loading: false});
+          this.setState({ready: true});
+          this.props.getSomeCharacters();
+        }
         deferred.resolve('promesa');
       })
       .on('error', function (err) {
@@ -38,16 +58,16 @@ class ApiMarvelComponent extends React.Component {
 
     return deferred.promise;
   }
-  // callBack() {
-  //   this.props.myFunc();
-  // }
-  myFunc() {
-    return this.state.someHeroes;
+  getSomeCharacters() {
+    return this.state.someCharacters;
   }
   render() {
     return (
       <div className='apimarvel-component'>
-        <button onClick={this.getHeroes}>Llamar a la api</button>
+        <button disabled={this.state.loading} onClick={this.getCharacters}>Llamar a la api</button>
+        <p>{this.state.loading ? 'Cargando...' : ''}</p>
+        <p>{this.state.ready ? 'Todo listo para la batalla' : ''}</p>
+        <p>{this.state.error ? 'Algo ha ido mal... Llama a la API de nuevo' : ''}</p>
       </div>
     );
   }
@@ -57,7 +77,7 @@ ApiMarvelComponent.displayName = 'ApiMarvelComponent';
 
 // Uncomment properties you need
 ApiMarvelComponent.propTypes = {
-  myFunc: React.PropTypes.func
+  getSomeCharacters: React.PropTypes.func
 };
 // ApiMarvelComponent.defaultProps = {};
 

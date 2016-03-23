@@ -3,6 +3,7 @@ require('styles/App.css');
 
 import React from 'react';
 import ApiMarvel from './ApiMarvelComponent';
+import BattleController from './BattleControllerComponent';
 import CardsContainer from './CardsContainerComponent';
 
 let yeomanImage = require('../images/yeoman.png');
@@ -15,34 +16,34 @@ class AppComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedHeroes: [],
-      someHeroes: []
+      selectedCharacters: [],
+      someCharacters: []
     };
     this.selectHeroesForBattle = this.selectHeroesForBattle.bind(this);
   }
 
   selectHeroesForBattle() {
-    this.setState({selectedHeroes: [this.state.someHeroes.pop(), this.state.someHeroes.pop()]});
+    this.setState({selectedCharacters: this.refs.battleController.selectBattlers()});
+
+    // this.setState({selectedCharacters: [this.state.someCharacters.pop(), this.state.someCharacters.pop()]});
   }
 
-  setHeroes() {
-    this.setState({someHeroes: shuffle(this.refs.apiMarvel.myFunc())});
-    this.selectHeroesForBattle();
+  setCharacters() {
+    this.setState({someCharacters: shuffle(this.refs.apiMarvel.getSomeCharacters())});
+    // this.selectHeroesForBattle();
   }
 
   render() {
     return (
       <div className="index">
         <img src={yeomanImage} alt="Yeoman Generator" />
-        <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
-        <ApiMarvel ref="apiMarvel" heroes={this.state.selectedHeroes} myFunc={this.setHeroes.bind(this)}/>
-        <button disabled={this.state.someHeroes.length < 2} onClick={this.selectHeroesForBattle}>Nuevos contrincantes {this.state.someHeroes.length}</button>
-        <div>
-          <button disabled={!this.state.someHeroes.length}>Retar a eventos</button>
-          <button disabled={!this.state.someHeroes.length}>Retar a series</button>
-          <button disabled={!this.state.someHeroes.length}>Retar a historias</button>
+        <div className="notice">
+          <h1> Welcome to the most epic MARVEL battle </h1>
+          <small>Do you know every hero of MARVEL? Show me everything you know</small>
         </div>
-        <CardsContainer heroes={this.state.selectedHeroes}/>
+        <ApiMarvel ref="apiMarvel" getSomeCharacters={this.setCharacters.bind(this)}/>
+        <BattleController ref="battleController" battlers={this.state.someCharacters} selectBattlers={this.selectHeroesForBattle.bind(this)}/>
+        <CardsContainer characters={this.state.selectedCharacters}/>
       </div>
     );
   }
