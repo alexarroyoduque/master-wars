@@ -1,13 +1,58 @@
 .card-component
-  $card-width: 200px;
-  border: 1px dashed #07FF70
-  width: $card-width;
+  $card-width: 140px
+  $red-marvel: #ee1b2d
+  $blue-marvel: #0040ff
+  $yellow-marvel: #f3ee34
+  border: 5px solid $yellow-marvel
+  width: 80%
+  position: relative
+  height: 140px
+  background-color: darken($red-marvel, 25%)
 
+  &:before
+    content: " "
+    position: absolute
+    z-index: 0
+    top: 0px
+    left: 0
+    right: 0
+    bottom: 0
+    border-top: 3px solid $red-marvel
+    border-right: 3px solid $red-marvel
 
   h1
-    font-size: 1.2em;
-    background-color: #247948;
+    font-size: 1em
+    background-color: $red-marvel
+    position: absolute
+    top: 0
+    margin: 0
+    right: 0
+    padding: 5px
+    min-width: 150px
+    border-bottom: 3px solid lighten($red-marvel, 20%)
 
   img
-   width: $card-width;
-   height: $card-width;
+    width: $card-width
+    height: $card-width
+    margin: 0
+    border-right: 3px solid $red-marvel
+
+  dl
+    position: absolute
+    top: 0
+    right: 20px
+    margin-top: 47px
+  dt
+    float: left
+    clear: left
+    width: 100px
+    text-align: right
+    font-weight: bold
+    color: white
+
+  dt:after
+    content: ":"
+
+  dd
+    margin: 0 0 0 110px
+    padding: 0 0 0.5em 0

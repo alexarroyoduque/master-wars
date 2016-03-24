@@ -6,7 +6,7 @@ import ApiMarvel from './ApiMarvelComponent';
 import BattleController from './BattleControllerComponent';
 import CardsContainer from './CardsContainerComponent';
 
-let yeomanImage = require('../images/yeoman.png');
+let logo = require('../images/marvel.jpg');
 
 function shuffle(a) {
   return a.sort(function() {return Math.random() - 0.5});
@@ -36,10 +36,14 @@ class AppComponent extends React.Component {
   render() {
     return (
       <div className="index">
-        <img src={yeomanImage} alt="Yeoman Generator" />
         <div className="notice">
-          <h1> Welcome to the most epic MARVEL battle </h1>
-          <small>Do you know every hero of MARVEL? Show me everything you know</small>
+          <div>
+            <img width="60px" src={logo} alt="Marvel" />
+          </div>
+          <div>
+            <h1> Welcome to the most epic MARVEL battle </h1>
+            <small>Do you know every hero of MARVEL? Show me everything you know</small>
+          </div>
         </div>
         <ApiMarvel ref="apiMarvel" getSomeCharacters={this.setCharacters.bind(this)}/>
         <BattleController ref="battleController" battlers={this.state.someCharacters} selectBattlers={this.selectHeroesForBattle.bind(this)}/>
