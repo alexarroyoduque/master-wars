@@ -4,6 +4,10 @@ import React from 'react';
 
 require('styles/BattleController.sass');
 
+let getRandomInt = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 class BattleControllerComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -12,21 +16,32 @@ class BattleControllerComponent extends React.Component {
       battleStarted: false,
       currentWinner: '-',
       scorePlayerOne: 0,
-      scorePlayerTwo: 0
+      scorePlayerTwo: 0,
+      battleTypes: [
+        {key: 'events', text: 'eventos'},
+        {key: 'series', text: 'series'},
+        {key: 'events', text: 'historias'}
+      ],
+      currentBattleType: {}
     };
-    this.callback = this.callback.bind(this);
-    this.battle = this.battle.bind(this);
+    this.setNewBattlersCallback = this.setNewBattlersCallback.bind(this);
     this.selectBattlers = this.selectBattlers.bind(this);
-    this.eventsBattle = this.eventsBattle.bind(this);
-    this.seriesBattle = this.seriesBattle.bind(this);
-    this.storiesBattle = this.storiesBattle.bind(this);
     this.manageBattleScore = this.manageBattleScore.bind(this);
+    this.setNewBattleType = this.setNewBattleType.bind(this);
   }
 
-  callback() {
+  setNewBattleType() {
+    var indexBattle = getRandomInt(0, this.state.battleTypes.length - 1),
+        battle = this.state.battleTypes[indexBattle];
+
+    this.setState({currentBattleType: battle});
+  }
+
+  setNewBattlersCallback() {
     //http://stackoverflow.com/questions/30782948/why-calling-react-setstate-method-doesnt-mutate-the-state-immediately
     this.setState(
       {currentBattlers: [this.props.battlers.pop(), this.props.battlers.pop()]}, () => {
+        this.setNewBattleType();
         this.setState({battleStarted: true});
         this.setState({currentWinner: '-'});
         this.props.selectBattlers();
@@ -38,46 +53,43 @@ class BattleControllerComponent extends React.Component {
     return this.state.currentBattlers;
   }
 
-  manageBattleScore(battleResult) {
+  manageBattleScore(winner) {
     let newScore = 0;
-    console.log(this.state.scorePlayerOne);
-    if (battleResult === 'one') {
+    if (winner === 'player') {
       newScore = this.state.scorePlayerOne;
       newScore++;
       this.setState({scorePlayerOne: newScore});
-    } else if (battleResult === 'two') {
+    } else if (winner === 'machine') {
       newScore = this.state.scorePlayerTwo;
       newScore++;
       this.setState({scorePlayerTwo: newScore});
     }
   }
 
-  battle(type) {
+  fight(selectedHeroIndex) {
     let currentBattlers = this.state.currentBattlers,
-        battleResult;
+        winnerHero,
+        type = this.state.currentBattleType.key,
+        winner = 'none';
     if (currentBattlers[0][type].available > currentBattlers[1][type].available) {
-      battleResult = 'one';
+      winnerHero = 0;
     } else if (currentBattlers[1][type].available > currentBattlers[0][type].available) {
-      battleResult = 'two';
+      winnerHero = 1;
     } else {
-      battleResult = 'draw';
+      winnerHero = 'none';
     }
 
-    this.manageBattleScore(battleResult);
+    if (winnerHero !== 'hero') {
+      if (selectedHeroIndex === winnerHero) {
+        winner = 'player';
+      } else {
+        winner = 'machine';
+      }
+    }
+
+    this.manageBattleScore(winner);
     this.setState({battleStarted: false});
-    return battleResult;
-  }
-
-  eventsBattle() {
-    this.setState({currentWinner: this.battle('events')});
-  }
-
-  seriesBattle() {
-    this.setState({currentWinner: this.battle('series')});
-  }
-
-  storiesBattle() {
-    this.setState({currentWinner: this.battle('stories')});
+    this.setState({currentBattleType: {}});
   }
 
   render() {
@@ -85,19 +97,20 @@ class BattleControllerComponent extends React.Component {
       <div className="battlecontroller-component">
         <div>
           <div>
-            <button disabled={this.props.battlers.length < 2 || this.state.battleStarted} onClick={this.callback}>Nuevos contrincantes {this.props.battlers.length}</button>
+            <button disabled={this.props.battlers.length < 2 || this.state.battleStarted} onClick={this.setNewBattlersCallback}>Nuevos contrincantes {this.props.battlers.length}</button>
           </div>
           <div>
-            <button disabled={!this.state.battleStarted} onClick={this.eventsBattle}>Retar a eventos</button>
-            <button disabled={!this.state.battleStarted} onClick={this.seriesBattle}>Retar a series</button>
-            <button disabled={!this.state.battleStarted} onClick={this.storiesBattle}>Retar a historias</button>
+            <p>¿Quien ha participado en más {this.state.currentBattleType.text || '...'}?</p>
+            {this.state.currentBattlers.map((hero, index)=> {
+              return <button disabled={!this.state.battleStarted} onClick={this.fight.bind(this, index)} key={hero.name}>{hero.name}</button>
+            })}
           </div>
           <div>
             <p>Player vencedor de la batalla actual: {this.state.currentWinner}</p>
           </div>
           <div>
-            <p>Score Player 1: {this.state.scorePlayerOne}</p>
-            <p>Score Player 2: {this.state.scorePlayerTwo}</p>
+            <p>Player score: {this.state.scorePlayerOne}</p>
+            <p>Beyonder score: {this.state.scorePlayerTwo}</p>
           </div>
         </div>
       </div>
