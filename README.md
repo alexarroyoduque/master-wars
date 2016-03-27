@@ -1,6 +1,7 @@
-# MASTER Wars
+# MASTER Wars ![MARVEL](https://github.com/alexarroyoduque/marvel-master/blob/master/src/images/marvel.jpg)
 
 Welcome to the most epic battle of Marvel heroes.
+
 
 This is an experimental game to know technologies like [React](https://facebook.github.io/react) and [Marvel Api](http://developer.marvel.com/)
 
