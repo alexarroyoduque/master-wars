@@ -17,10 +17,11 @@ class BattleControllerComponent extends React.Component {
       currentWinner: '-',
       scorePlayerOne: 0,
       scorePlayerTwo: 0,
+      scoreDraw: 0,
       battleTypes: [
-        {key: 'events', text: 'eventos'},
+        {key: 'events', text: 'events'},
         {key: 'series', text: 'series'},
-        {key: 'events', text: 'historias'}
+        {key: 'events', text: 'stories'}
       ],
       currentBattleType: {}
     };
@@ -63,6 +64,10 @@ class BattleControllerComponent extends React.Component {
       newScore = this.state.scorePlayerTwo;
       newScore++;
       this.setState({scorePlayerTwo: newScore});
+    } else {
+      newScore = this.state.scoreDraw;
+      newScore++;
+      this.setState({scoreDraw: newScore});
     }
   }
 
@@ -70,26 +75,28 @@ class BattleControllerComponent extends React.Component {
     let currentBattlers = this.state.currentBattlers,
         winnerHero,
         type = this.state.currentBattleType.key,
-        winner = 'none';
+        winner = 'draw';
     if (currentBattlers[0][type].available > currentBattlers[1][type].available) {
       winnerHero = 0;
     } else if (currentBattlers[1][type].available > currentBattlers[0][type].available) {
       winnerHero = 1;
     } else {
-      winnerHero = 'none';
+      winnerHero = 'draw';
     }
 
-    if (winnerHero !== 'hero') {
+    if (winnerHero !== 'draw') {
       if (selectedHeroIndex === winnerHero) {
         winner = 'player';
       } else {
         winner = 'machine';
       }
+    } else {
+      winner = 'draw';
     }
 
+    this.setState({currentWinner: winner});
     this.manageBattleScore(winner);
     this.setState({battleStarted: false});
-    this.setState({currentBattleType: {}});
   }
 
   render() {
@@ -97,20 +104,34 @@ class BattleControllerComponent extends React.Component {
       <div className="battlecontroller-component">
         <div>
           <div>
-            <button disabled={this.props.battlers.length < 2 || this.state.battleStarted} onClick={this.setNewBattlersCallback}>Nuevos contrincantes {this.props.battlers.length}</button>
-          </div>
-          <div>
-            <p>¿Quien ha participado en más {this.state.currentBattleType.text || '...'}?</p>
+            <p>Who has participated in more <span className='battle-type'>{this.state.currentBattleType.text || '...'}</span>?</p>
             {this.state.currentBattlers.map((hero, index)=> {
-              return <button disabled={!this.state.battleStarted} onClick={this.fight.bind(this, index)} key={hero.name}>{hero.name}</button>
+              return <button className={`hero-${index}`} disabled={!this.state.battleStarted} onClick={this.fight.bind(this, index)} key={hero.name}>{hero.name}</button>
             })}
           </div>
           <div>
-            <p>Player vencedor de la batalla actual: {this.state.currentWinner}</p>
+            <p>Current winner: {this.state.currentWinner}</p>
           </div>
           <div>
-            <p>Player score: {this.state.scorePlayerOne}</p>
-            <p>Beyonder score: {this.state.scorePlayerTwo}</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Machine</th>
+                  <th>Draw</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{this.state.scorePlayerOne}</td>
+                  <td>{this.state.scorePlayerTwo}</td>
+                  <td>{this.state.scoreDraw}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="new-battle-bar">
+            <button className="battle" disabled={this.props.battlers.length < 2 || this.state.battleStarted} onClick={this.setNewBattlersCallback}>New Battle {this.props.battlers.length}</button>
           </div>
         </div>
       </div>

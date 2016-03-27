@@ -1,2 +1,29 @@
+@import "./mixins"
+
 .battlecontroller-component
-  border: 1px dashed #eed844
+  padding: 10px
+  background-color: #092e67
+  .new-battle-bar
+    text-align: center
+    padding: 10px
+  .battle
+    @include marvel-button($red-marvel)
+  .battle-type
+    color: rgb(90, 242, 100)
+  button.hero-0
+    @include marvel-button(rgb(153, 72, 224))
+  button.hero-1
+    @include marvel-button(rgb(157, 26, 116))
+
+  button[class^="hero-"]
+    width: 100%
+    margin-bottom: 10px
+
+  table
+    margin: 0 auto
+    width: 90%
+    border: 1px solid white
+  tr
+    text-align: center
+  th, td
+    padding: 5px

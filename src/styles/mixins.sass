@@ -1,0 +1,16 @@
+@import "./colors"
+
+@mixin marvel-button($color)
+  color: white
+  background-color: $color
+  border: 0
+  padding: 8px
+  text-transform: uppercase
+  border-radius: 4px
+
+  &:hover
+    background-color: lighten($color, 5%)
+
+  &:disabled
+    color: darken(white, 30%)
+    background-color: lighten($color, 15%)

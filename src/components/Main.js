@@ -5,6 +5,7 @@ import React from 'react';
 import ApiMarvel from './ApiMarvelComponent';
 import BattleController from './BattleControllerComponent';
 import CardsContainer from './CardsContainerComponent';
+import Header from './HeaderComponent';
 
 let logo = require('../images/marvel.jpg');
 
@@ -33,18 +34,11 @@ class AppComponent extends React.Component {
     // this.selectHeroesForBattle();
   }
 
+  // <img width="60px" src={logo} alt="Marvel" />
   render() {
     return (
       <div className="index">
-        <div className="notice">
-          <div>
-            <img width="60px" src={logo} alt="Marvel" />
-          </div>
-          <div>
-            <h1> Welcome to the most epic MARVEL battle </h1>
-            <small>Do you know every hero of MARVEL? Show me everything you know</small>
-          </div>
-        </div>
+        <Header/>
         <ApiMarvel ref="apiMarvel" getSomeCharacters={this.setCharacters.bind(this)}/>
         <BattleController ref="battleController" battlers={this.state.someCharacters} selectBattlers={this.selectHeroesForBattle.bind(this)}/>
         <CardsContainer characters={this.state.selectedCharacters}/>

@@ -9,11 +9,9 @@ class CardsContainerComponent extends React.Component {
   render() {
     return (
       <div className='cardscontainer-component'>
-        <ul>
-          {this.props.characters.map(function(item) {
-            return <li key={item.id}> <Card character={item}/> </li>
-          })}
-        </ul>
+        {this.props.characters.map(function(item) {
+          return <div key={item.id}> <Card character={item}/> </div>
+        })}
       </div>
     );
   }

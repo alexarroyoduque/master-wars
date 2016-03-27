@@ -64,10 +64,15 @@ class ApiMarvelComponent extends React.Component {
   render() {
     return (
       <div className='apimarvel-component'>
-        <button disabled={this.state.loading} onClick={this.getCharacters}>Llamar a la api</button>
-        <p>{this.state.loading ? 'Cargando...' : ''}</p>
-        <p>{this.state.ready ? 'Todo listo para la batalla' : ''}</p>
-        <p>{this.state.error ? 'Algo ha ido mal... Llama a la API de nuevo' : ''}</p>
+        <div className='button-container'>
+          <button disabled={this.state.loading} onClick={this.getCharacters}>get heroes</button>
+        </div>
+        <div className='messages-bar'>
+          <p>Get new heroes calling to MARVEL Api</p>
+          <p aria-hidden={!this.state.loading}>Loading...</p>
+          <p aria-hidden={!this.state.ready}>All is ready</p>
+          <p aria-hidden={!this.state.error}>Error... Call for new heroes again</p>
+        </div>
       </div>
     );
   }
