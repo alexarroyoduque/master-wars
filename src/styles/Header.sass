@@ -1,4 +1,5 @@
 @import ./colors
+@import ./mixins
 .header-component
   header
     text-align: center
@@ -10,7 +11,9 @@
     padding: 5px
 
   .subtitle
-    background-color: $blue-marvel
+    @include vignete-style()
+    background-color: #b3b3b3
+    color: black
     padding: 5px
     p
       margin: 3px

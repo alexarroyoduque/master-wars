@@ -1,19 +1,31 @@
 @import "./mixins"
 .apimarvel-component
+  @include vignete-style()
   padding: 5px
-  background-color: #235094
   overflow: hidden
+  background-color: #f0eb16
+  background-image: url("/images/spiderman.png")
+  background-repeat: no-repeat
+  background-size: 110px
+  background-position-x: 100%
+  color: black
 
   button
     @include marvel-button(#5baa18)
-    width: 90px
-    height: 90px
+    @include action-button()
   .messages-bar, .button-container
     float: left
   .messages-bar
-    width: calc(100% - 95px)
+    background-image: url("/images/bocadillo.png")
+    background-size: 100% 100%
+    width: calc(100% - 163px)
+    min-height: 90px
+    background-repeat: no-repeat
+    text-align: center
   p
-    margin: 8px
+    margin: 24px 0px 0 15px
+    width: 160px
+    font-size: 15px
 
 [aria-hidden=true]
   visibility: hidden

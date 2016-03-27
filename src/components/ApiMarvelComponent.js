@@ -23,6 +23,7 @@ class ApiMarvelComponent extends React.Component {
     super(props);
     this.state = {
       someCharacters: [],
+      firstTime: true,
       loading: false,
       ready: false,
       error: false
@@ -33,6 +34,7 @@ class ApiMarvelComponent extends React.Component {
   getCharacters() {
     var deferred = Q.defer();
     this.setState({loading: true});
+    this.setState({firstTime: false});
     this.setState({ready: false});
     this.setState({error: false});
     this.setState({someCharacters: []});
@@ -68,9 +70,9 @@ class ApiMarvelComponent extends React.Component {
           <button disabled={this.state.loading} onClick={this.getCharacters}>get heroes</button>
         </div>
         <div className='messages-bar'>
-          <p>Get new heroes calling to MARVEL Api</p>
+          <p aria-hidden={!this.state.firstTime}>Get heroes calling to MARVEL data base</p>
           <p aria-hidden={!this.state.loading}>Loading...</p>
-          <p aria-hidden={!this.state.ready}>All is ready</p>
+          <p aria-hidden={!this.state.ready}>Ready for new battle</p>
           <p aria-hidden={!this.state.error}>Error... Call for new heroes again</p>
         </div>
       </div>

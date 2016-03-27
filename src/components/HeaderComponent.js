@@ -9,9 +9,9 @@ class HeaderComponent extends React.Component {
     return (
       <div className="header-component">
         <header>
-          <h1>Master wars</h1>
+          <h1>MASTER Wars</h1>
           <div className="subtitle">
-            <p>Welcome to the most epic MARVEL battle </p>
+            <p>Created by <a href="http://alexarroyoduque.github.io/#/home" target="_blank">@AlexArroyoDuque</a> with <a href="https://facebook.github.io/react/React" target="_blank">React</a></p>
           </div>
         </header>
       </div>

@@ -12,5 +12,18 @@
     background-color: lighten($color, 5%)
 
   &:disabled
-    color: darken(white, 30%)
+    color: lighten($color, 30%)
     background-color: lighten($color, 15%)
+
+  &:active
+    background-color: darken($color, 10%)
+
+
+@mixin action-button()
+  width: 90px
+  height: 90px
+  border: 3px solid black
+
+
+@mixin vignete-style()
+  border: 2px solid black

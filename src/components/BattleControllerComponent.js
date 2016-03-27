@@ -102,17 +102,11 @@ class BattleControllerComponent extends React.Component {
   render() {
     return (
       <div className="battlecontroller-component">
-        <div>
-          <div>
-            <p>Who has participated in more <span className='battle-type'>{this.state.currentBattleType.text || '...'}</span>?</p>
-            {this.state.currentBattlers.map((hero, index)=> {
-              return <button className={`hero-${index}`} disabled={!this.state.battleStarted} onClick={this.fight.bind(this, index)} key={hero.name}>{hero.name}</button>
-            })}
+        <div className="player-actions">
+          <div className="button-container">
+            <button className="battle" disabled={this.props.battlers.length < 2 || this.state.battleStarted} onClick={this.setNewBattlersCallback}>New Battle {this.props.battlers.length}</button>
           </div>
-          <div>
-            <p>Current winner: {this.state.currentWinner}</p>
-          </div>
-          <div>
+          <div className="score-container">
             <table>
               <thead>
                 <tr>
@@ -130,9 +124,15 @@ class BattleControllerComponent extends React.Component {
               </tbody>
             </table>
           </div>
-          <div className="new-battle-bar">
-            <button className="battle" disabled={this.props.battlers.length < 2 || this.state.battleStarted} onClick={this.setNewBattlersCallback}>New Battle {this.props.battlers.length}</button>
-          </div>
+        </div>
+        <div>
+          <p>Who has participated in more <span className='battle-type'>{this.state.currentBattleType.text || '...'}</span>?</p>
+          {this.state.currentBattlers.map((hero, index)=> {
+            return <button className={`hero-${index}`} disabled={!this.state.battleStarted} onClick={this.fight.bind(this, index)} key={hero.name}>{hero.name}</button>
+          })}
+        </div>
+        <div>
+          <p>Current winner: {this.state.currentWinner}</p>
         </div>
       </div>
     );
