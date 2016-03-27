@@ -112,14 +112,14 @@ class BattleControllerComponent extends React.Component {
                 <tr>
                   <th>Player</th>
                   <th>Machine</th>
-                  <th>Draw</th>
+                  <th className="draw">Draw</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>{this.state.scorePlayerOne}</td>
                   <td>{this.state.scorePlayerTwo}</td>
-                  <td>{this.state.scoreDraw}</td>
+                  <td className="draw">{this.state.scoreDraw}</td>
                 </tr>
               </tbody>
             </table>

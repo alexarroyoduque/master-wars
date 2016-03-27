@@ -4,6 +4,11 @@
   @include vignete-style()
   padding: 5px
   background-color: #1a71e2
+  background-image: url("/images/wolverine.png")
+  background-size: cover
+  background-repeat: no-repeat
+  background-position-x: 140px
+  background-position-y: 21px
   .player-actions
     overflow: hidden
   .button-container
@@ -28,9 +33,13 @@
     border: 2px solid black
 
   table
+    @include vignete-style()
     margin: 0 auto
     width: 100%
-    border: 1px solid white
+    color: black
+    background: white
+    .draw
+      color: rgb(161, 161, 161)
   tr
     text-align: center
   th, td
