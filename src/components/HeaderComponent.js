@@ -11,7 +11,7 @@ class HeaderComponent extends React.Component {
         <header>
           <h1>MASTER Wars</h1>
           <div className="subtitle">
-            <p>Created by <a href="http://alexarroyoduque.github.io/#/home" target="_blank">@AlexArroyoDuque</a> with <a href="https://facebook.github.io/react/React" target="_blank">React</a></p>
+            <p>Created by <a href="http://alexarroyoduque.github.io/#/home" target="_blank">@AlexArroyoDuque</a> with <a href="https://facebook.github.io/react/index.html" target="_blank">React</a></p>
           </div>
         </header>
       </div>
