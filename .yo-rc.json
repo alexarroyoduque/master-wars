@@ -1,6 +1,6 @@
 {
   "generator-react-webpack": {
-    "appName": "masterOfCards",
+    "appName": "MASTERwars",
     "style": "sass",
     "postcss": true
   }
