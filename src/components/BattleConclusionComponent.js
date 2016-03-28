@@ -9,16 +9,15 @@ var element;
 class BattleConclusionComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.createAnimation = this.createAnimation.bind(this);
   }
 
   showConclusion() {
     element = document.querySelector('.battleconclusion-component');
     element.animate([
-        {opacity: 0, transform: "scale(0.1)"},
-        {opacity: 1, transform: "scale(0.8)"},
-        {opacity: 1.0, transform: "scale(1)"},
-        {opacity: 0, transform: "scale(0.9)"}
+        {opacity: 0, transform: 'scale(0.1)'},
+        {opacity: 1, transform: 'scale(0.8)'},
+        {opacity: 1.0, transform: 'scale(1)'},
+        {opacity: 0, transform: 'scale(0.9)'}
     ], {
         duration: 2600,
         fill: 'forwards',
@@ -37,7 +36,7 @@ class BattleConclusionComponent extends React.Component {
   }
   render() {
     return (
-      <div className="battleconclusion-component">
+      <div className='battleconclusion-component'>
         {this.getWinText()}
       </div>
     );
