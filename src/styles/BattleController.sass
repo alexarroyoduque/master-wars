@@ -1,9 +1,9 @@
-@import "./mixins"
+@import ./mixins
 
 .battlecontroller-component
   @include vignete-style()
   padding: 5px
-  background-color: #1a71e2
+  background-color: $blue-marvel
   background-image: url("/images/wolverine.png")
   background-size: cover
   background-repeat: no-repeat
@@ -21,11 +21,13 @@
     @include marvel-button($red-marvel)
     @include action-button()
   .battle-type
-    color: rgb(90, 242, 100)
+    color: lighten($green-marvel, 10%)
+    background-color: black
+    padding: 1px 5px 1px 5px
   button.hero-0
-    @include marvel-button(#e09300)
+    @include marvel-button($orange-marvel)
   button.hero-1
-    @include marvel-button(#e09300)
+    @include marvel-button($orange-marvel)
 
   button[class^="hero-"]
     width: 100%
@@ -39,7 +41,7 @@
     color: black
     background: white
     .draw
-      color: rgb(161, 161, 161)
+      color: lighten($gray-marvel, 1%)
   tr
     text-align: center
   th, td

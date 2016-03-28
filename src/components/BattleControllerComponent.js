@@ -112,8 +112,8 @@ class BattleControllerComponent extends React.Component {
             <table>
               <thead>
                 <tr>
-                  <th>Player</th>
-                  <th>Machine</th>
+                  <th>Wins</th>
+                  <th>Losses</th>
                   <th className="draw">Draw</th>
                 </tr>
               </thead>
