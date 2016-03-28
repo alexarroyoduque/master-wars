@@ -6,6 +6,7 @@ import ApiMarvel from './ApiMarvelComponent';
 import BattleController from './BattleControllerComponent';
 import CardsContainer from './CardsContainerComponent';
 import Header from './HeaderComponent';
+import BattleConclusion from './BattleConclusionComponent';
 
 let logo = require('../images/marvel.jpg');
 
@@ -35,6 +36,7 @@ class AppComponent extends React.Component {
   }
 
   // <img width="60px" src={logo} alt="Marvel" />
+
   render() {
     return (
       <div className="index">

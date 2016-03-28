@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import BattleConclusion from './BattleConclusionComponent';
 
 require('styles/BattleController.sass');
 
@@ -95,6 +96,7 @@ class BattleControllerComponent extends React.Component {
     }
 
     this.setState({currentWinner: winner});
+    this.refs.battleConclusion.showConclusion();
     this.manageBattleScore(winner);
     this.setState({battleStarted: false});
   }
@@ -134,6 +136,7 @@ class BattleControllerComponent extends React.Component {
         <div>
           <p>Current winner: {this.state.currentWinner}</p>
         </div>
+        <BattleConclusion ref="battleConclusion" winner={this.state.currentWinner}/>
       </div>
     );
   }
