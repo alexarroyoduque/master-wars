@@ -67,7 +67,7 @@ class ApiMarvelComponent extends React.Component {
     return (
       <div className='apimarvel-component'>
         <div className='button-container'>
-          <button disabled={this.state.loading} onClick={this.getCharacters}>get heroes</button>
+          <button className={!this.state.someCharacters.length ? ' button-animated' : ''} disabled={this.state.loading || !!this.state.someCharacters.length} onClick={this.getCharacters}>get heroes</button>
         </div>
         <div className='messages-bar'>
           <p aria-hidden={!this.state.firstTime}>Get heroes calling to MARVEL data base</p>

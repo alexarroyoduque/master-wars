@@ -10,16 +10,17 @@
   background-position-x: 140px
   background-position-y: 21px
   .player-actions
-    overflow: hidden
+    // overflow: hidden
+    min-height: 85px
   .button-container
     float: left
+    button
+      @include marvel-button($red-marvel)
+      @include action-button()
   .score-container
     padding: 0 5px 0 5px
     float: left
     width: calc(100% - 100px)
-  .battle
-    @include marvel-button($red-marvel)
-    @include action-button()
   .battle-type
     color: lighten($green-marvel, 10%)
     background-color: black

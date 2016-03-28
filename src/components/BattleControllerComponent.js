@@ -106,7 +106,7 @@ class BattleControllerComponent extends React.Component {
       <div className="battlecontroller-component">
         <div className="player-actions">
           <div className="button-container">
-            <button className="battle" disabled={this.props.battlers.length < 2 || this.state.battleStarted} onClick={this.setNewBattlersCallback}>New Battle {this.props.battlers.length}</button>
+            <button className={this.props.battlers.length > 2 && !this.state.battleStarted ? ' button-animated' : ''} disabled={this.props.battlers.length < 2 || this.state.battleStarted} onClick={this.setNewBattlersCallback}>New Battle {this.props.battlers.length}</button>
           </div>
           <div className="score-container">
             <table>
@@ -132,9 +132,6 @@ class BattleControllerComponent extends React.Component {
           {this.state.currentBattlers.map((hero, index)=> {
             return <button className={`hero-${index}`} disabled={!this.state.battleStarted} onClick={this.fight.bind(this, index)} key={hero.name}>{hero.name}</button>
           })}
-        </div>
-        <div>
-          <p>Current winner: {this.state.currentWinner}</p>
         </div>
         <BattleConclusion ref="battleConclusion" winner={this.state.currentWinner}/>
       </div>

@@ -1,9 +1,9 @@
 'use strict';
 
 import React from 'react';
-import WebAnimations from 'web-animations-js';
 
-require('styles//BattleConclusion.sass');
+require('styles/BattleConclusion.sass');
+require('web-animations-js');
 
 var element;
 class BattleConclusionComponent extends React.Component {
@@ -19,7 +19,7 @@ class BattleConclusionComponent extends React.Component {
         {opacity: 1.0, transform: 'scale(1)'},
         {opacity: 0, transform: 'scale(0.9)'}
     ], {
-        duration: 2600,
+        duration: 1900,
         fill: 'forwards',
         easing: 'cubic-bezier(0.15, 0.87, 0.65, 0.59)'
     });

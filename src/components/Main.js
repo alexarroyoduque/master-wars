@@ -6,9 +6,8 @@ import ApiMarvel from './ApiMarvelComponent';
 import BattleController from './BattleControllerComponent';
 import CardsContainer from './CardsContainerComponent';
 import Header from './HeaderComponent';
-import BattleConclusion from './BattleConclusionComponent';
 
-let logo = require('../images/marvel.jpg');
+// let logo = require('../images/marvel.jpg');
 
 function shuffle(a) {
   return a.sort(function() {return Math.random() - 0.5});
@@ -26,13 +25,10 @@ class AppComponent extends React.Component {
 
   selectHeroesForBattle() {
     this.setState({selectedCharacters: this.refs.battleController.selectBattlers()});
-
-    // this.setState({selectedCharacters: [this.state.someCharacters.pop(), this.state.someCharacters.pop()]});
   }
 
   setCharacters() {
     this.setState({someCharacters: shuffle(this.refs.apiMarvel.getSomeCharacters())});
-    // this.selectHeroesForBattle();
   }
 
   // <img width="60px" src={logo} alt="Marvel" />

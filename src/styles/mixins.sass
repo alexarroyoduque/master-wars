@@ -24,6 +24,25 @@
   height: 90px
   border: 3px solid black
 
-
 @mixin vignete-style()
   border: 2px solid black
+
+@mixin button-animated()
+  animation-name: animation-active
+  animation-iteration-count: infinite
+  animation-timing-function: ease
+  animation-duration: .5s
+  animation-direction: alternate
+
+@keyframes animation-active
+  0%
+    transform: rotate(0deg)
+  30%
+    transform: rotate(-4deg)
+  60%
+    transform: rotate(2deg)
+  100%
+    transform: rotate(-6deg)
+
+.button-animated
+  @include button-animated()
