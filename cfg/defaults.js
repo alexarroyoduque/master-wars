@@ -2,6 +2,9 @@
 const path = require('path');
 const srcPath = path.join(__dirname, '/../src');
 const dfltPort = 8000;
+var base64 = require('postcss-base64');
+var autoprefixer = require('autoprefixer');
+
 function getDefaultModules() {
   return {
     preLoaders: [{
@@ -43,6 +46,6 @@ module.exports = {
   port: dfltPort,
   getDefaultModules: getDefaultModules,
   postcss: function () {
-    return [];
+    return [autoprefixer, base64];
   }
 };
