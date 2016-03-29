@@ -10,7 +10,7 @@ class CardComponent extends React.Component {
     return (
       <div className="card-component">
         <h1>{this.props.character.name}</h1>
-        <img src={`${this.props.character.thumbnail.path}/standard_large.${this.props.character.thumbnail.extension}`}/>
+        <img alt={this.props.character.name} src={`${this.props.character.thumbnail.path}/standard_large.${this.props.character.thumbnail.extension}`}/>
         <dl>
           <dt>events</dt>
           <dd>{this.props.character.events.available}</dd>
