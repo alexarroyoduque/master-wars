@@ -29,6 +29,7 @@ class ApiMarvelComponent extends React.Component {
       error: false
     };
     this.getCharacters = this.getCharacters.bind(this);
+    this.addClassByState = this.addClassByState.bind(this);
   }
 
   getCharacters() {
@@ -63,11 +64,21 @@ class ApiMarvelComponent extends React.Component {
   getSomeCharacters() {
     return this.state.someCharacters;
   }
+  addClassByState() {
+    if (!this.state.someCharacters.length && !this.state.loading) {
+      return 'animation-shake';
+    } else if (this.state.loading) {
+      console.log('cargando');
+      return 'animation-loading';
+    } else {
+      return '';
+    }
+  }
   render() {
     return (
       <div className='apimarvel-component'>
         <div className='button-container'>
-          <button className={!this.state.someCharacters.length ? ' button-animated' : ''} disabled={this.state.loading || !!this.state.someCharacters.length} onClick={this.getCharacters}>get heroes</button>
+          <button className={this.addClassByState()} disabled={this.state.loading || !!this.state.someCharacters.length} onClick={this.getCharacters}>get heroes</button>
         </div>
         <div className='messages-bar'>
           <p aria-hidden={!this.state.firstTime}>Get heroes calling to MARVEL data base</p>

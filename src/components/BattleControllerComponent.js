@@ -106,7 +106,7 @@ class BattleControllerComponent extends React.Component {
       <div className="battlecontroller-component">
         <div className="player-actions">
           <div className="button-container">
-            <button className={this.props.battlers.length > 2 && !this.state.battleStarted ? ' button-animated' : ''} disabled={this.props.battlers.length < 2 || this.state.battleStarted} onClick={this.setNewBattlersCallback}>New Battle {this.props.battlers.length}</button>
+            <button className={this.props.battlers.length > 2 && !this.state.battleStarted ? ' animation-shake' : ''} disabled={this.props.battlers.length < 2 || this.state.battleStarted} onClick={this.setNewBattlersCallback}>New Battle {this.props.battlers.length}</button>
           </div>
           <div className="score-container">
             <table>
