@@ -30,6 +30,7 @@ class BattleControllerComponent extends React.Component {
     this.selectBattlers = this.selectBattlers.bind(this);
     this.manageBattleScore = this.manageBattleScore.bind(this);
     this.setNewBattleType = this.setNewBattleType.bind(this);
+    this.addHighlightClass = this.addHighlightClass.bind(this);
   }
 
   setNewBattleType() {
@@ -101,6 +102,12 @@ class BattleControllerComponent extends React.Component {
     this.setState({battleStarted: false});
   }
 
+  addHighlightClass(){
+    if (this.state.battleStarted) {
+      return ' animation-highlight';
+    }
+  }
+
   render() {
     return (
       <div className="battlecontroller-component">
@@ -130,7 +137,7 @@ class BattleControllerComponent extends React.Component {
         <div>
           <p>Who has participated in more <span className='battle-type'>{this.state.currentBattleType.text || '...'}</span>?</p>
           {this.state.currentBattlers.map((hero, index)=> {
-            return <button className={`hero-${index}`} disabled={!this.state.battleStarted} onClick={this.fight.bind(this, index)} key={hero.name}>{hero.name}</button>
+            return <button className={`hero-${index} ${this.addHighlightClass()}`} disabled={!this.state.battleStarted} onClick={this.fight.bind(this, index)} key={hero.name}>{hero.name}</button>
           })}
         </div>
         <BattleConclusion ref="battleConclusion" winner={this.state.currentWinner}/>

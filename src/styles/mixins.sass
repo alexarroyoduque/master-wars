@@ -7,6 +7,7 @@
   padding: 8px
   text-transform: uppercase
   border-radius: 4px
+  transition: transform .5s ease
 
   &:hover
     background-color: lighten($color, 5%)
@@ -23,47 +24,7 @@
   width: 90px
   height: 90px
   border: 3px solid black
-  transition: transform .5s ease
-  transition: border-radius .5s ease
+  transition: border-radius .3s ease, transform .3s ease .5s
 
 @mixin vignete-style()
   border: 2px solid black
-
-@mixin animation-shake()
-  animation-name: animation-shake
-  animation-iteration-count: infinite
-  animation-timing-function: ease
-  animation-duration: .5s
-  animation-direction: alternate
-
-@keyframes animation-shake
-  0%
-    transform: rotate(0deg)
-  30%
-    transform: rotate(-4deg)
-  60%
-    transform: rotate(2deg)
-  100%
-    transform: rotate(-6deg)
-
-.animation-shake
-  @include animation-shake()
-
-@keyframes animation-loading
-  0%
-    border-radius: 10%
-  100%
-    border-radius: 30%
-
-@mixin animation-loading()
-  animation-name: animation-loading
-  animation-iteration-count: infinite
-  animation-timing-function: ease
-  animation-duration: 1s
-  animation-direction: alternate
-
-.animation-loading
-  @include animation-loading()
-  transition: border-radius .3s ease
-
-
