@@ -38,20 +38,20 @@ function proxy() {
     return url;
   }
 
-  app.get('/marvel/characters', (req, res) => {
+  app.get('/marvel/characters', function (req, res) {
     var allData = [];
-    client.get(generateUrl(), (data1) => {
+    client.get(generateUrl(), function (data1) {
       console.log('first request');
-      console.log(data1.length);
-      if (data1.length) {
-        allData.push(data1);
+      if (data1.data) {
+        allData = allData.concat(data1.data.results);
       }
-      client.get(generateUrl(), (data2) => {
+      client.get(generateUrl(), function (data2) {
         console.log('second request');
-        console.log(data2.length);
-        if (data2.length) {
-          allData.push(data2);
+        if (data2.data) {
+          allData = allData.concat(data2.data.results);
         }
+        console.log('allData');
+        console.log(allData);
         res.send(allData);
       });
     });

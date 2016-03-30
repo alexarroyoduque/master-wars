@@ -41,13 +41,13 @@ class ApiMarvelComponent extends React.Component {
     this.setState({someCharacters: []});
     this.getSomeCharacters();
     client
-      .get('http://localhost:3000/marvel/characters', (response) => {
+      .get(`${window.location.origin}/marvel/characters`, (response) => {
         this.setState({loading: false});
-        if (!response.data) {
+        if (!response.length) {
             this.setState({error: true});
         } else {
-          console.log(response.data.results);
-          this.setState({someCharacters: getSomeShuffleCollection(response.data.results)});
+          console.log(response);
+          this.setState({someCharacters: getSomeShuffleCollection(response)});
           this.setState({loading: false});
           this.setState({ready: true});
           this.props.getSomeCharacters();
@@ -55,6 +55,7 @@ class ApiMarvelComponent extends React.Component {
         deferred.resolve('promesa');
       })
       .on('error', function (err) {
+        this.setState({error: true});
         console.log('something went wrong on the request');
         deferred.reject(new Error(err));
       });
