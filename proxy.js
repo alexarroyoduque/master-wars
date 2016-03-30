@@ -30,7 +30,7 @@ function proxy() {
       apiKey = '04bbc7aed211dea82a9012da2d8c3582',
       limit = 50,
       total = 1485 - limit,
-      offset = getRandomInt(1, total);
+      offset = getRandomInt(1, total),
       privateKey = '2a5bcb9d808a7f3173bfa17b926ac8664a3e6e32',
       ts = new Date().getTime(),
       hash = Md5(`${ts}${privateKey}${apiKey}`),
