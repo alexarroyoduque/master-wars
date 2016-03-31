@@ -42,7 +42,7 @@ class ApiMarvelComponent extends React.Component {
     this.getSomeCharacters();
     client
       .get('http://localhost:3000/marvel/characters', (response) => {
-      // .get(`${window.location.origin}/marvel/characters`, (response) => {
+      // .get(`${window.location.origin}/marvel/characters`, (response) => { // uncomment for dist
         this.setState({loading: false});
         if (!response.length) {
             this.setState({error: true});
