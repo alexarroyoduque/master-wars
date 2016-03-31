@@ -47,7 +47,7 @@ class ApiMarvelComponent extends React.Component {
         if (!response.length) {
             this.setState({error: true});
         } else {
-          console.log(response);
+          // console.log(response);
           this.setState({someCharacters: getSomeShuffleCollection(response)});
           this.setState({loading: false});
           this.setState({ready: true});
