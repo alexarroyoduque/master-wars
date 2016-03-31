@@ -57,7 +57,7 @@ class ApiMarvelComponent extends React.Component {
       })
       .on('error', function (err) {
         this.setState({error: true});
-        console.log('something went wrong on the request');
+        this.setState({loading: false});
         deferred.reject(new Error(err));
       });
 
@@ -70,7 +70,7 @@ class ApiMarvelComponent extends React.Component {
     if (!this.state.someCharacters.length && !this.state.loading) {
       return 'animation-shake';
     } else if (this.state.loading) {
-      console.log('cargando');
+      // console.log('cargando');
       return 'animation-loading';
     } else {
       return '';
