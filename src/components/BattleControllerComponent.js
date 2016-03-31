@@ -99,7 +99,9 @@ class BattleControllerComponent extends React.Component {
     this.setState({currentWinner: winner});
     this.refs.battleConclusion.showConclusion();
     this.manageBattleScore(winner);
-    this.setState({battleStarted: false});
+    setTimeout(()=>{
+      this.setState({battleStarted: false});
+    }, 1800);
   }
 
   addHighlightClass(){
