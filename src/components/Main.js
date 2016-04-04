@@ -6,6 +6,7 @@ import ApiMarvel from './ApiMarvelComponent';
 import BattleController from './BattleControllerComponent';
 import CardsContainer from './CardsContainerComponent';
 import Header from './HeaderComponent';
+import About from './AboutComponent';
 
 // let logo = require('../images/marvel.jpg');
 
@@ -40,6 +41,7 @@ class AppComponent extends React.Component {
         <ApiMarvel visibility={this.state.someCharacters.length ? 'hidden' : ''} ref="apiMarvel" getSomeCharacters={this.setCharacters.bind(this)}/>
         <BattleController visibility={!this.state.someCharacters.length ? 'hidden' : ''} ref="battleController" battlers={this.state.someCharacters} selectBattlers={this.selectHeroesForBattle.bind(this)}/>
         <CardsContainer characters={this.state.selectedCharacters}/>
+        <About/>
       </div>
     );
   }
