@@ -5,7 +5,7 @@ Welcome to the most epic battle of Marvel heroes.
 
 This is an experimental game to know technologies like [React](https://facebook.github.io/react) and [Marvel Api](http://developer.marvel.com/)
 
-Online demo: [https://master-wars.herokuapp.com/](https://master-wars.herokuapp.com/) *work in progress*
+Online demo: [https://master-wars.herokuapp.com/](https://master-wars.herokuapp.com/)
 
 ## The game
 1. Press "Get heroes" button: this calls the database to bring new Marvel heroes.
