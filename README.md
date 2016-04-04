@@ -14,6 +14,19 @@ Online demo: [https://master-wars.herokuapp.com/](https://master-wars.herokuapp.
 4. Now choose the hero who would win in the question
 5. Repeat steps 3 and 4 until there are no more heroes, then repeat the process from step 1...
 
+## For developers
+### Requirements
+1. Install [GIT](http://git-scm.com/)
+2. Install [Node](http://nodejs.org/)
+3. Witho Node installed, install webpack with `npm install -g webpack`
+
+### Run project
+1. Clone this repository
+  + `git clone https://github.com/alejandroarroyo/master-wars`
+  + `cd master-wars`
+2. Install dependencies with `npm install`
+3. Run project with `npm run serv`
+
 ## Thanks to
 
 - [Marvel Api](http://developer.marvel.com/) to provide a public API with information about their comics
