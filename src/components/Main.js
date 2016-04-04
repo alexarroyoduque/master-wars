@@ -37,8 +37,8 @@ class AppComponent extends React.Component {
     return (
       <div className="index">
         <Header/>
-        <ApiMarvel ref="apiMarvel" getSomeCharacters={this.setCharacters.bind(this)}/>
-        <BattleController ref="battleController" battlers={this.state.someCharacters} selectBattlers={this.selectHeroesForBattle.bind(this)}/>
+        <ApiMarvel visibility={this.state.someCharacters.length ? 'hidden' : ''} ref="apiMarvel" getSomeCharacters={this.setCharacters.bind(this)}/>
+        <BattleController visibility={!this.state.someCharacters.length ? 'hidden' : ''} ref="battleController" battlers={this.state.someCharacters} selectBattlers={this.selectHeroesForBattle.bind(this)}/>
         <CardsContainer characters={this.state.selectedCharacters}/>
       </div>
     );

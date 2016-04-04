@@ -51,7 +51,7 @@ function proxy() {
           allData = allData.concat(data2.data.results);
         }
         console.log('allData');
-        console.log(allData);
+        console.log(allData.length);
         res.send(allData);
       });
     });

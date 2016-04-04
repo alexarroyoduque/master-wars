@@ -115,7 +115,7 @@ class BattleControllerComponent extends React.Component {
 
   render() {
     return (
-      <div className="battlecontroller-component">
+      <div className={`battlecontroller-component ${this.props.visibility}`}>
         <div className="player-actions">
           <div className="button-container">
             <button className={this.props.battlers.length > 2 && !this.state.battleStarted ? ' animation-shake' : ''} disabled={this.props.battlers.length < 2 || this.state.battleStarted} onClick={this.setNewBattlersCallback}>New Battle {this.props.battlers.length}</button>
@@ -140,7 +140,9 @@ class BattleControllerComponent extends React.Component {
           </div>
         </div>
         <div>
-          <p>Who has participated in more <span className='battle-type'>{this.state.currentBattleType.text || '...'}</span>?</p>
+          <div className={!this.state.currentBattleType.text ? 'question hidden' : 'question'}>
+            <p>Who has participated in more <span className='battle-type'>{this.state.currentBattleType.text || '...'}</span>?</p>
+          </div>
           {this.state.currentBattlers.map((hero, index)=> {
             return <button className={`hero-${index} ${this.addHighlightClass()}`} disabled={this.state.playerHasAnswered} onClick={this.fight.bind(this, index)} key={hero.name}>{hero.name}</button>
           })}
@@ -155,6 +157,7 @@ BattleControllerComponent.displayName = 'BattleControllerComponent';
 
 // Uncomment properties you need
 BattleControllerComponent.propTypes = {
+  visibility: React.PropTypes.string,
   battlers: React.PropTypes.array,
   selectBattlers: React.PropTypes.func
 };

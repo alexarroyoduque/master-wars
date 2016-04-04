@@ -78,7 +78,7 @@ class ApiMarvelComponent extends React.Component {
   }
   render() {
     return (
-      <div className='apimarvel-component'>
+      <div className={`apimarvel-component ${this.props.visibility}`}>
         <div className='button-container'>
           <button className={this.addClassByState()} disabled={this.state.loading || !!this.state.someCharacters.length} onClick={this.getCharacters}>get heroes</button>
         </div>
@@ -97,6 +97,7 @@ ApiMarvelComponent.displayName = 'ApiMarvelComponent';
 
 // Uncomment properties you need
 ApiMarvelComponent.propTypes = {
+  visibility: React.PropTypes.string,
   getSomeCharacters: React.PropTypes.func
 };
 // ApiMarvelComponent.defaultProps = {};
