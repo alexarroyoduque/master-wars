@@ -1,4 +1,4 @@
-# MASTER Wars ![MARVEL](https://github.com/alexarroyoduque/marvel-master/blob/master/src/images/marvel.jpg)
+# MASTER Wars
 
 Welcome to the most epic battle of Marvel heroes.
 
