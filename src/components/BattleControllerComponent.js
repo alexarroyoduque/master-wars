@@ -29,6 +29,7 @@ class BattleControllerComponent extends React.Component {
     };
     this.setNewBattlersCallback = this.setNewBattlersCallback.bind(this);
     this.selectBattlers = this.selectBattlers.bind(this);
+    this.checkIfPlayerHasAnswered = this.checkIfPlayerHasAnswered.bind(this);
     this.manageBattleScore = this.manageBattleScore.bind(this);
     this.setNewBattleType = this.setNewBattleType.bind(this);
     this.addHighlightClass = this.addHighlightClass.bind(this);
@@ -50,12 +51,17 @@ class BattleControllerComponent extends React.Component {
         this.setState({playerHasAnswered: false});
         this.setState({currentWinner: '-'});
         this.props.selectBattlers();
+        this.props.checkIfPlayerHasAnswered();
       }
     );
   }
 
   selectBattlers() {
     return this.state.currentBattlers;
+  }
+
+  checkIfPlayerHasAnswered() {
+    return this.state.playerHasAnswered;
   }
 
   manageBattleScore(winner) {
@@ -100,6 +106,7 @@ class BattleControllerComponent extends React.Component {
 
     this.setState({currentWinner: winner});
     this.setState({playerHasAnswered: true});
+    this.props.checkIfPlayerHasAnswered();
     this.refs.battleConclusion.showConclusion();
     this.manageBattleScore(winner);
     setTimeout(()=>{
@@ -159,7 +166,8 @@ BattleControllerComponent.displayName = 'BattleControllerComponent';
 BattleControllerComponent.propTypes = {
   visibility: React.PropTypes.string,
   battlers: React.PropTypes.array,
-  selectBattlers: React.PropTypes.func
+  selectBattlers: React.PropTypes.func,
+  checkIfPlayerHasAnswered: React.PropTypes.func
 };
 BattleControllerComponent.defaultProps = {};
 

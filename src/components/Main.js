@@ -19,7 +19,8 @@ class AppComponent extends React.Component {
     super(props);
     this.state = {
       selectedCharacters: [],
-      someCharacters: []
+      someCharacters: [],
+      showSecret: false
     };
     this.selectHeroesForBattle = this.selectHeroesForBattle.bind(this);
   }
@@ -32,6 +33,10 @@ class AppComponent extends React.Component {
     this.setState({someCharacters: shuffle(this.refs.apiMarvel.getSomeCharacters())});
   }
 
+  getIfPlayerHasAnswered(){
+    this.setState({showSecret: this.refs.battleController.checkIfPlayerHasAnswered()});
+  }
+
   // <img width="60px" src={logo} alt="Marvel" />
 
   render() {
@@ -39,8 +44,8 @@ class AppComponent extends React.Component {
       <div className="index">
         <Header/>
         <ApiMarvel visibility={this.state.someCharacters.length ? 'hidden' : ''} ref="apiMarvel" getSomeCharacters={this.setCharacters.bind(this)}/>
-        <BattleController visibility={!this.state.someCharacters.length ? 'hidden' : ''} ref="battleController" battlers={this.state.someCharacters} selectBattlers={this.selectHeroesForBattle.bind(this)}/>
-        <CardsContainer characters={this.state.selectedCharacters}/>
+        <BattleController checkIfPlayerHasAnswered={this.getIfPlayerHasAnswered.bind(this)} visibility={!this.state.someCharacters.length ? 'hidden' : ''} ref="battleController" battlers={this.state.someCharacters} selectBattlers={this.selectHeroesForBattle.bind(this)}/>
+        <CardsContainer showSecret={this.state.showSecret} characters={this.state.selectedCharacters}/>
         <About/>
       </div>
     );

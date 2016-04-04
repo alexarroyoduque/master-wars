@@ -13,11 +13,11 @@ class CardComponent extends React.Component {
         <img alt={this.props.character.name} src={`${this.props.character.thumbnail.path}/standard_large.${this.props.character.thumbnail.extension}`}/>
         <dl>
           <dt>events</dt>
-          <dd>{this.props.character.events.available}</dd>
+          <dd>{this.props.showSecret ? '?' : this.props.character.events.available}</dd>
           <dt>series</dt>
-          <dd>{this.props.character.series.available}</dd>
+          <dd>{this.props.showSecret ? '?' : this.props.character.series.available}</dd>
           <dt>stories</dt>
-          <dd>{this.props.character.stories.available}</dd>
+          <dd>{this.props.showSecret ? '?' : this.props.character.stories.available}</dd>
         </dl>
       </div>
     );
@@ -28,7 +28,8 @@ CardComponent.displayName = 'CardComponent';
 
 // Uncomment properties you need
 CardComponent.propTypes = {
-  character: React.PropTypes.object
+  character: React.PropTypes.object,
+  showSecret: React.PropTypes.bool
 };
 // CardComponent.defaultProps = {};
 
