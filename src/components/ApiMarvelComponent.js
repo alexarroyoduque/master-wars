@@ -7,7 +7,7 @@ function shuffle(a) {
   return a.sort(function() {return Math.random() - 0.5});
 }
 
-function getSomeShuffleCollection(collection, amount = 22) {
+function getSomeShuffleCollection(collection, amount = 20) {
   let some = shuffle(collection);
   some.length = amount
   return some;
