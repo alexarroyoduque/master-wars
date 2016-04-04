@@ -31,7 +31,7 @@ Online demo: [https://master-wars.herokuapp.com/](https://master-wars.herokuapp.
 
 - [Marvel Api](http://developer.marvel.com/) to provide a public API with information about their comics
 
-- weblogixx to create the incredible
+- newtriks to create the incredible
 [generator-react-webpack](https://github.com/newtriks/generator-react-webpack)
 
 ## Author
