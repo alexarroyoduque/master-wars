@@ -2,8 +2,13 @@ var express = require('express');
   app = express(),
   Client = require('node-rest-client').Client,
   client = new Client(),
-  Md5 = require('md5'),
+  crypto = require('crypto');
   bodyParser = require('body-parser');
+
+  function generateHash(ts, privateKey, apiKey) {
+    const hash = crypto.createHash('md5').update(ts + privateKey + apiKey).digest('hex');
+    return hash;
+  }
 
 function proxy() {
   // parse application/x-www-form-urlencoded
@@ -28,24 +33,36 @@ function proxy() {
   function generateUrl() {
     const base = 'http://gateway.marvel.com/v1/public/characters?',
       apiKey = '04bbc7aed211dea82a9012da2d8c3582',
-      limit = 50,
+      limit = 20,
       total = 1485 - limit,
       offset = getRandomInt(1, total),
       privateKey = '2a5bcb9d808a7f3173bfa17b926ac8664a3e6e32',
       ts = new Date().getTime(),
-      hash = Md5(`${ts}${privateKey}${apiKey}`),
+      hash = generateHash(ts, privateKey, apiKey),
       url = `${base}limit=${limit}&offset=${offset}&apikey=${apiKey}&ts=${ts}&hash=${hash}`;
+      console.log('url');
+      console.log(url);
     return url;
   }
 
   app.get('/marvel/characters', function (req, res) {
     var allData = [];
-    client.get(generateUrl(), function (data1) {
+    client.get(generateUrl(), function (data1, response1) {
+      if (response1.statusCode !== 200) {
+        console.error('First request failed:', response1.statusCode);
+        res.status(response1.statusCode).send('Error in first request');
+        return;
+      }
       console.log('first request');
       if (data1.data) {
         allData = allData.concat(data1.data.results);
       }
-      client.get(generateUrl(), function (data2) {
+      client.get(generateUrl(), function (data2, response2) {
+        if (response2.statusCode !== 200) {
+          console.error('Second request failed:', response2.statusCode);
+          res.status(response2.statusCode).send('Error in second request');
+          return;
+        }
         console.log('second request');
         if (data2.data) {
           allData = allData.concat(data2.data.results);

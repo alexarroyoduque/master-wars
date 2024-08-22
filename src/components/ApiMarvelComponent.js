@@ -2,6 +2,18 @@
 
 import React from 'react';
 import Q from 'q';
+const crypto = require('crypto');
+
+
+function generateHash(ts, privateKey, apiKey) {
+  const hash = crypto.createHash('md5').update(ts + privateKey + apiKey).digest('hex');
+  return hash;
+}
+
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 function shuffle(a) {
   return a.sort(function() {return Math.random() - 0.5});
@@ -32,6 +44,20 @@ class ApiMarvelComponent extends React.Component {
     this.addClassByState = this.addClassByState.bind(this);
   }
 
+  generateUrl(limit) {
+    const base = 'http://gateway.marvel.com/v1/public/characters?',
+      apiKey = '04bbc7aed211dea82a9012da2d8c3582',
+      total = 1485 - limit,
+      offset = getRandomInt(1, total),
+      privateKey = '2a5bcb9d808a7f3173bfa17b926ac8664a3e6e32',
+      ts = new Date().getTime(),
+      hash = generateHash(ts, privateKey, apiKey),
+      url = `${base}limit=${limit}&offset=${offset}&apikey=${apiKey}&ts=${ts}&hash=${hash}`;
+      // console.log('url');
+      // console.log(url);
+    return url;
+  }
+
   getCharacters() {
     var deferred = Q.defer();
     this.setState({loading: true});
@@ -41,14 +67,14 @@ class ApiMarvelComponent extends React.Component {
     this.setState({someCharacters: []});
     this.getSomeCharacters();
     client
-      .get('http://localhost:3000/marvel/characters', (response) => {
-      // .get(`${window.location.origin}/marvel/characters`, (response) => { // uncomment for dist
+      // .get('http://localhost:3000/marvel/characters', (response) => { // uncomment to use proxy
+      .get(this.generateUrl(22), (response) => { // uncomment to call api directly
+        let characters = response.data.results;
         this.setState({loading: false});
-        if (!response.length) {
+        if (!characters.length) {
             this.setState({error: true});
         } else {
-          // console.log(response);
-          this.setState({someCharacters: getSomeShuffleCollection(response)});
+          this.setState({someCharacters: getSomeShuffleCollection(characters)});
           this.setState({loading: false});
           this.setState({ready: true});
           this.props.getSomeCharacters();

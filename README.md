@@ -2,10 +2,9 @@
 
 Welcome to the most epic battle of Marvel heroes.
 
-
 This is an experimental game to know technologies like [React](https://facebook.github.io/react) and [Marvel Api](http://developer.marvel.com/)
 
-Online demo: [https://master-wars.herokuapp.com/](https://master-wars.herokuapp.com/)
+Online demo: [https://master-wars-online.web.app](https://master-wars-online.web.app)
 
 ## The game
 1. Press "Get heroes" button: this calls the database to bring new Marvel heroes.
@@ -17,15 +16,23 @@ Online demo: [https://master-wars.herokuapp.com/](https://master-wars.herokuapp.
 ## For developers
 ### Requirements
 1. Install [GIT](http://git-scm.com/)
-2. Install [Node](http://nodejs.org/)
-3. Witho Node installed, install webpack with `npm install -g webpack`
+2. Install [Node 6.17.1](http://nodejs.org/)
+3. Then install webpack with `npm install -g webpack@1.13.1`
 
 ### Run project
 1. Clone this repository
   + `git clone https://github.com/alejandroarroyo/master-wars`
   + `cd master-wars`
 2. Install dependencies with `npm install`
-3. Run project with `npm run serv`
+3. Run project with `npm run serve`
+
+### Build
+1. `npm run dist`
+2. `npm run serve:dist` to test dist
+
+### Deploy
+Need node 18
+`nvm use 6 && npm run dist && nvm use 18 && firebase deploy`
 
 ## Thanks to
 

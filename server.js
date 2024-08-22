@@ -7,7 +7,6 @@ const config = require('./webpack.config');
 const open = require('open');
 const proxy = require('./proxy');
 
-
 new WebpackDevServer(webpack(config), config.devServer)
 .listen(config.port, 'localhost', (err) => {
   if (err) {
